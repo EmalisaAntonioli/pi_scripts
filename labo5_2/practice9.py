@@ -1,3 +1,7 @@
+"""
+werkt niet juist
+"""
+
 #blink LED 
 import RPi.GPIO as GPIO
 import time
@@ -31,7 +35,13 @@ def wave_step(pin):
 
 
 while(True):
-    if (GPIO.input(17) == 0):
+    wave_step(18)
+    wave_step(23)
+    wave_step(25)
+    wave_step(21)
+
+while(True):
+    if (GPIO.input(17) == 1):
         wave_step(18)
         wave_step(23)
         wave_step(25)
