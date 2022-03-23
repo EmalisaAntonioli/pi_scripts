@@ -23,7 +23,7 @@ def full_step(pin1, pin2):
 
     time.sleep(0.01)
     GPIO.output(pin1, 0)
-    GPIO.output(pin2, 1)
+    GPIO.output(pin2, 0)
 
     time.sleep(0.01)
 
