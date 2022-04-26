@@ -1,6 +1,8 @@
 # Drive the stepper motor
 # The stepper motor is attached to four, vairable pins
 # Make sure the pins are in the right (i.e. neighbouring) order
+import lcd
+
 import RPi.GPIO as GPIO
 import time
 
@@ -22,7 +24,7 @@ def full_step(pin1, pin2):
 def step(pin1, pin2, pin3, pin4, frequency):
     # It is assumed that frequenct is equal to the amount of slots in the feeding disc
     # Calculate delay
-    delay = 86400 / frequency
+    delay = 1440 / frequency
     while(True):
         # Take a step big enough for the disc to let a pellet of food drop
         # Adjust the range to adjust how far the motor turns per feed
@@ -34,4 +36,7 @@ def step(pin1, pin2, pin3, pin4, frequency):
             print(i)
         print('fishes have been fed')
         # Wait until the next feeding time
-        time.sleep(delay)
+        for i in range(int(delay)):
+            lcd.print_message("new feed in\n%i minutes" % (delay - i))
+            print("new feed in\n%i minutes" % (delay - i))
+            time.sleep(10)

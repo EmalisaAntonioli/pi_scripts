@@ -30,9 +30,9 @@ cs0 = digitalio.DigitalInOut(board.CE0)  # chip select
 adc = SPIDevice(spi, cs0, baudrate= 1000000)
 
 # Initialize display
-dc = digitalio.DigitalInOut(board.D23)  # data/command
+dc = digitalio.DigitalInOut(board.D20)  # data/command
 cs1 = digitalio.DigitalInOut(board.CE1)  # chip select CE1 for display
-reset = digitalio.DigitalInOut(board.D24)  # reset
+reset = digitalio.DigitalInOut(board.D16)  # reset
 display = adafruit_pcd8544.PCD8544(spi, dc, cs1, reset, baudrate= 1000000)
 display.bias = 4
 display.contrast = 60
@@ -55,12 +55,12 @@ draw.rectangle((0, 0, display.width, display.height), outline=255, fill=255)
 
 # Write some text.
 nummer=4
-in0=readadc(0)
+# in0=readadc(0)
 draw.text((1,0), 'ADC value', font=font)
 draw.text((1,8), 'on display', font=font)
-draw.text((1,16), f'in0={in0}', font=font)
-draw.text((1,32), (str(nummer)), font=font)
+# draw.text((1,16), f'in0={in0}', font=font)
+# draw.text((1,32), (str(nummer)), font=font)
 display.image(image)
 display.show()
 
-print(in0)
+# print(in0)
