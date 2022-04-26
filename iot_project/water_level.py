@@ -37,7 +37,7 @@ def control_pump(pin_in, pin_out, max_distance, pin_pump):
     while(True):
         distance = depth_measurement(pin_in, pin_out)
         print("water distance: %.4f" % distance)
-        lcd.print_message("waterlevel:\n %.3f" % distance)
+        lcd.print_message("waterlevel:\n %.3f m" % distance)
 
         if distance > max_distance:
             # If the water level is too low, turn the pump on
@@ -47,8 +47,10 @@ def control_pump(pin_in, pin_out, max_distance, pin_pump):
             while(distance > max_distance):
                 distance = depth_measurement(pin_in, pin_out)
                 print("water distance: %.4f" % distance)
-                lcd.print_message("%.3f" % distance)
+                lcd.print_message("%.3f m" % distance)
                 time.sleep(4)
+
+            
 
             # Once the water level is no longer too low, turn the pump off
             switch_pump("off", pin_pump)
