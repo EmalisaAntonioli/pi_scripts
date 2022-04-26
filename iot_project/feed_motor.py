@@ -21,13 +21,23 @@ def full_step(pin1, pin2):
     GPIO.output(pin2, 0)
     time.sleep(0.01)
 
-def turn_feeding_disc(pin1, pin2, pin3, pin4, frequency):
-    for i in range(int(500/frequency)):
+def turn_feeding_disc(pin1, pin2, pin3, pin4):
+    # 10 is the amount of holes in the disc, change accordingly
+    for i in range(int(500/10)):
             full_step(pin1, pin2)
             full_step(pin2, pin3)
             full_step(pin3, pin4)
             full_step(pin4, pin1)
             print(i)
+
+def turn_feeding_disc_reverse(pin1, pin2, pin3, pin4):
+    # 10 is the amount of holes in the disc, change accordingly
+    for i in range(int(500/10)):
+            full_step(pin1, pin4)
+            full_step(pin4, pin3)
+            full_step(pin3, pin2)
+            full_step(pin2, pin1)
+            print(i)    
 
 def step(pin1, pin2, pin3, pin4, frequency):
     # It is assumed that frequenct is equal to the amount of slots in the feeding disc
@@ -36,7 +46,7 @@ def step(pin1, pin2, pin3, pin4, frequency):
     while(True):
         # Take a step big enough for the disc to let a pellet of food drop
         # Adjust the range to adjust how far the motor turns per feed
-        turn_feeding_disc(pin1, pin2, pin3, pin4, frequency)
+        turn_feeding_disc(pin1, pin2, pin3, pin4)
         print('fishes have been fed')
         # Wait until the next feeding time
         for i in range(int(delay)):
