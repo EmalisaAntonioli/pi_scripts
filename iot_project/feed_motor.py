@@ -23,7 +23,7 @@ def full_step(pin1, pin2):
 
 def turn_feeding_disc(pin1, pin2, pin3, pin4):
     # 10 is the amount of holes in the disc, change accordingly
-    for i in range(int(500/10)):
+    for i in range(int(490/24)):
             full_step(pin1, pin2)
             full_step(pin2, pin3)
             full_step(pin3, pin4)
@@ -32,7 +32,7 @@ def turn_feeding_disc(pin1, pin2, pin3, pin4):
 
 def turn_feeding_disc_reverse(pin1, pin2, pin3, pin4):
     # 10 is the amount of holes in the disc, change accordingly
-    for i in range(int(500/10)):
+    for i in range(int(490/24)):
             full_step(pin1, pin4)
             full_step(pin4, pin3)
             full_step(pin3, pin2)
