@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time
 from datetime import datetime
 import lcd
+import ubeac
 
 def depth_measurement(pin_in, pin_out):
     GPIO.output(pin_out, 1)
@@ -34,10 +35,12 @@ def control_pump(pin_in, pin_out, max_distance, pin_pump):
     GPIO.setup(pin_in, GPIO.IN)
     GPIO.setup(pin_out, GPIO.OUT)
 
+
     while(True):
         distance = depth_measurement(pin_in, pin_out)
         print("water distance: %.4f" % distance)
         lcd.print_message("waterlevel:\n %.3f m" % distance)
+        ubeac.send_data_water('waterlevel', distance, 'pump', 0)
 
         if distance > max_distance:
             print("hello")
@@ -45,15 +48,19 @@ def control_pump(pin_in, pin_out, max_distance, pin_pump):
             switch_pump("on", pin_pump)
             print("The pump has been turned on")
 
+
             while(distance > max_distance):
                 time.sleep(1)
                 distance = depth_measurement(pin_in, pin_out)
                 print("water distance: %.4f" % distance)
                 lcd.print_message("%.3f m" % distance)
+                ubeac.send_data_water('waterlevel', distance, 'pump', 1)
+
                 
 
             # Once the water level is no longer too low, turn the pump off
             switch_pump("off", pin_pump)
             print("The pump has been turned off")
+
                 
         time.sleep(4)
