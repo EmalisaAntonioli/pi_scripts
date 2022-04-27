@@ -28,7 +28,6 @@ def turn_feeding_disc(pin1, pin2, pin3, pin4):
             full_step(pin2, pin3)
             full_step(pin3, pin4)
             full_step(pin4, pin1)
-            print(i)
 
 def turn_feeding_disc_reverse(pin1, pin2, pin3, pin4):
     # 10 is the amount of holes in the disc, change accordingly
@@ -37,7 +36,6 @@ def turn_feeding_disc_reverse(pin1, pin2, pin3, pin4):
             full_step(pin4, pin3)
             full_step(pin3, pin2)
             full_step(pin2, pin1)
-            print(i)    
 
 def step(pin1, pin2, pin3, pin4, frequency):
     # It is assumed that frequenct is equal to the amount of slots in the feeding disc

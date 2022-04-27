@@ -47,6 +47,7 @@ def light_button(pin_light, pin_light_button):
 
 
 def check_buttons(pin_pump_button, pin_pump):
+    # While the button is pressed in, the pump will be on
     GPIO.setmode(GPIO.BCM) 
     GPIO.setup(pin_pump_button, GPIO.IN)
 
@@ -54,10 +55,12 @@ def check_buttons(pin_pump_button, pin_pump):
         # PUMP
         if (GPIO.input(pin_pump_button) == 0):
             print('switch pump')
+
             water_level.switch_pump("on", pin_pump)
             while(GPIO.input(pin_pump_button) == 0):
                 time.sleep(0.01)
             water_level.switch_pump("off",pin_pump)
+
             print("switch pump off")
 
-        time.sleep(0.1)
+        time.sleep(0.2)
