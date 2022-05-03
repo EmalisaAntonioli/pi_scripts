@@ -25,6 +25,7 @@ def motor_button(pin_motor, motor1, motor2, motor3, motor4):
             else:
                 print("switch motor")
                 feed_motor.turn_feeding_disc(motor1, motor2, motor3, motor4)
+                print('fishes have been fed')
         
         time.sleep(0.1)
         
