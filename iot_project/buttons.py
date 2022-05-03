@@ -42,8 +42,7 @@ def light_button(pin_light, pin_light_button):
                 led.turn_off_light(pin_light)
                 # anti-bouncing
                 time.sleep(0.1)
-        time.sleep(0.1)
-        
+        time.sleep(0.1)      
 
 
 def check_buttons(pin_pump_button, pin_pump):
@@ -54,13 +53,10 @@ def check_buttons(pin_pump_button, pin_pump):
     while(True):
         # PUMP
         if (GPIO.input(pin_pump_button) == 0):
-            print('switch pump')
 
             water_level.switch_pump("on", pin_pump)
             while(GPIO.input(pin_pump_button) == 0):
                 time.sleep(0.01)
             water_level.switch_pump("off",pin_pump)
-
-            print("switch pump off")
 
         time.sleep(0.2)

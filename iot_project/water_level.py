@@ -40,10 +40,9 @@ def control_pump(pin_in, pin_out, max_distance, pin_pump):
         distance = depth_measurement(pin_in, pin_out)
         print("water distance: %.4f" % distance)
         lcd.print_message("waterlevel:\n %.3f m" % distance)
-        ubeac.send_data_water('waterlevel', distance, 'pump', 0)
+        # ubeac.send_data_water('waterlevel', distance, 'pump', 0)
 
         if distance > max_distance:
-            print("hello")
             # If the water level is too low, turn the pump on
             switch_pump("on", pin_pump)
             print("The pump has been turned on")
@@ -54,7 +53,7 @@ def control_pump(pin_in, pin_out, max_distance, pin_pump):
                 distance = depth_measurement(pin_in, pin_out)
                 print("water distance: %.4f" % distance)
                 lcd.print_message("%.3f m" % distance)
-                ubeac.send_data_water('waterlevel', distance, 'pump', 1)
+                # ubeac.send_data_water('waterlevel', distance, 'pump', 1)
 
                 
 

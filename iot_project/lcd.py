@@ -59,7 +59,6 @@ def print_current_time():
 
         current_time = now.strftime("%H:%M:%S")
         lcd.print_message("current time:\n" + current_time)
-        print("current time:\n" + current_time)
         time.sleep(13)
 
 def clear_display():

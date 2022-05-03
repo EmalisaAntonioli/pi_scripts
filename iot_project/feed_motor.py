@@ -49,5 +49,4 @@ def step(pin1, pin2, pin3, pin4, frequency):
         # Wait until the next feeding time
         for i in range(int(delay)):
             lcd.print_message("new feed in\n%i minutes" % (delay - i))
-            print("new feed in\n%i minutes" % (delay - i))
             time.sleep(60)
