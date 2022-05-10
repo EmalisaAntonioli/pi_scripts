@@ -4,6 +4,7 @@ import lcd
 import buttons
 import led
 import ubeac
+from pi_audio_classify import classify;
 
 import threading
 
@@ -17,12 +18,15 @@ task2 = threading.Thread(target=feed_motor.step, args=(18, 23, 24, 25, 10))
 # Display the current time on the screen
 task3 = threading.Thread(target=lcd.print_current_time)
 # Keep an eye on the buttons
-task4 = threading.Thread(target=buttons.check_buttons, args=(17, 12))
+task4 = threading.Thread(target=buttons.pump_button, args=(17, 12))
 # Control the lights with time
 task5 = threading.Thread(target=led.control_light, args=([5]))
 task6 = threading.Thread(target=buttons.motor_button, args=(21, 18, 23, 24, 25))
 task7 = threading.Thread(target=buttons.light_button, args=(5, 13))
 task8 = threading.Thread(target=ubeac.ubeac)
+task9 = threading.Thread(target=buttons.light_timer, args=(5, 22))
+task10 = threading.Thread(target=classify.classify, args=(18, 23, 24, 25))
+
 
 task1.start()
 task2.start()
@@ -32,6 +36,9 @@ task5.start()
 task6.start()
 task7.start()
 task8.start()
+task9.start()
+task10.start()
+
 
 
 # while(True):
