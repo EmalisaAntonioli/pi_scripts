@@ -4,7 +4,7 @@ import lcd
 import buttons
 import led
 import ubeac
-from pi_audio_classify import classify;
+from pi_audio_classify.classify import classify;
 
 import threading
 
@@ -25,7 +25,7 @@ task6 = threading.Thread(target=buttons.motor_button, args=(21, 18, 23, 24, 25))
 task7 = threading.Thread(target=buttons.light_button, args=(5, 13))
 task8 = threading.Thread(target=ubeac.ubeac)
 task9 = threading.Thread(target=buttons.light_timer, args=(5, 22))
-task10 = threading.Thread(target=classify.classify, args=(18, 23, 24, 25))
+task10 = threading.Thread(target=classify, args=(18, 23, 24, 25))
 
 
 task1.start()

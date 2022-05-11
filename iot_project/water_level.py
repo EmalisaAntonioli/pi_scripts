@@ -49,11 +49,10 @@ def control_pump(pin_in, pin_out, max_distance, pin_pump):
             while(distance > max_distance):
                 time.sleep(1)
                 distance = depth_measurement(pin_in, pin_out)
-                lcd.print_message("%.3f m" % distance)
-                # ubeac.send_data_water('waterlevel', distance, 'pump', 1)
+                lcd.print_message("waterlevel:\n %.3f m" % distance)
 
             # Once the water level is no longer too low, turn the pump off
             switch_pump("off", pin_pump)
             print("The pump has been turned off")
                 
-        time.sleep(4)
+        time.sleep(5)

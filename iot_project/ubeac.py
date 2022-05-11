@@ -5,9 +5,14 @@ import time
 import water_level
 
 def ubeac():
+    GPIO.setmode(GPIO.BCM) 
+    GPIO.setup(5, GPIO.IN)
+    GPIO.setup(12, GPIO.IN)
+
     while(True):
         data_waterlevel = water_level.depth_measurement(26, 19)
         data_light = GPIO.input(5)
+        data_pump = GPIO.input(12)
         url = "http://emalisa.hub.ubeac.io/iotessEmalisa"
         uid = "iotessEmalisa"
             
@@ -19,12 +24,15 @@ def ubeac():
             },{
             'id': 'light',
             'data': data_light
+            },{
+            'id': 'pump',
+            'data': data_pump
             }]
         }
 
         r = requests.post(url, verify=False,  json=data)
 
-        print(r)
+        # print(r)
         time.sleep(1)
 
 
