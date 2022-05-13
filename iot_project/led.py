@@ -3,17 +3,10 @@ from datetime import datetime
 import time
 import lcd
 
-
 def turn_on_light(pin):
-    GPIO.setmode(GPIO.BCM) 
-
-    GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, 0)
 
 def turn_off_light(pin):
-    GPIO.setmode(GPIO.BCM) 
-
-    GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, 1)
 
 def control_light(pin_light):
@@ -27,8 +20,9 @@ def control_light(pin_light):
         
         if datetime.now().hour >= 7 and datetime.now().hour <= 18:
             if GPIO.input(pin_light):
+
                 lcd.print_message("light is off")
-            else:
+            else:                
                 lcd.print_message("light is on")
                 time.sleep(1)
                 lcd.print_message("light turns\noff at 6 pm")
@@ -43,8 +37,9 @@ def control_light(pin_light):
         time.sleep(29)
 
 def startup_light(pin_light):
+    turn_on_light(pin_light)
+
     if (datetime.now().hour >= 7 and datetime.now().hour <= 18):
         turn_on_light(pin_light)
     else:
         turn_off_light(pin_light)
-

@@ -9,8 +9,6 @@ import time
 
 def motor_button(pin_motor, motor1, motor2, motor3, motor4):
     # Watch the button that can release an extra feed
-    GPIO.setmode(GPIO.BCM) 
-    GPIO.setup(pin_motor, GPIO.IN)
 
     while(True):
         if (GPIO.input(pin_motor) == 0):
@@ -33,10 +31,7 @@ def motor_button(pin_motor, motor1, motor2, motor3, motor4):
         time.sleep(0.2)
         
 def light_button(pin_light, pin_light_button):
-    # Watch the button that can turn the light on and off
-    GPIO.setmode(GPIO.BCM) 
-    GPIO.setup(pin_light_button, GPIO.IN)
-    
+    # Watch the button that can turn the light on and off    
     while(True):
         if (GPIO.input(pin_light_button) == 0):
             # Turn the light on when off and vice versa
@@ -51,12 +46,9 @@ def light_button(pin_light, pin_light_button):
 
 def light_timer(pin_light, pin_light_button):
     # Watch the button that can turn the light on for 15 minutes
-    GPIO.setmode(GPIO.BCM) 
-    GPIO.setup(pin_light_button, GPIO.IN)
-
     while(True):
         if (GPIO.input(pin_light_button) == 0):
-            led.turn_on_light(pin_light)
+            never_gonna_give_you_up(pin_light)
             time.sleep(9)
             led.turn_off_light(pin_light)
         
@@ -65,9 +57,6 @@ def light_timer(pin_light, pin_light_button):
 
 def pump_button(pin_pump_button, pin_pump):
     # Watch the button with which the pump can be turned on
-    GPIO.setmode(GPIO.BCM) 
-    GPIO.setup(pin_pump_button, GPIO.IN)
-
     while(True):
         if (GPIO.input(pin_pump_button) == 0):
             # While the button is pressed, the pump will be on
@@ -76,5 +65,28 @@ def pump_button(pin_pump_button, pin_pump):
                 time.sleep(0.01)
             water_level.switch_pump("off",pin_pump)
 
-        #Anti-bouncing
+        # Anti-bouncing
         time.sleep(0.2)
+
+def never_gonna_give_you_up(pin_light):
+    # Use the relay as a musical instrument to play the ever famous anthem NGGYU by Rick Astley
+    led.turn_on_light(pin_light)
+    for i in range(3):
+        for i in range(2):
+            led.turn_off_light(5)
+            time.sleep(0.1)
+            led.turn_on_light(5)
+            time.sleep(0.1)
+        for i in range(2):
+            led.turn_off_light(5)
+            time.sleep(0.3)
+            led.turn_on_light(5)
+            time.sleep(0.3)
+        time.sleep(0.1)
+    led.turn_off_light(5)
+    time.sleep(0.1)
+    led.turn_on_light(5)
+    time.sleep(0.1)
+    led.turn_off_light(5)
+    time.sleep(0.4)
+    led.turn_on_light(5)

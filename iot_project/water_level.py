@@ -5,6 +5,7 @@ import lcd
 import ubeac
 
 def depth_measurement(pin_in, pin_out):
+    GPIO.setmode(GPIO.BCM) 
     GPIO.output(pin_out, 1)
     time.sleep(0.00001)
     GPIO.output(pin_out, 0)
@@ -24,22 +25,15 @@ def depth_measurement(pin_in, pin_out):
     return distance
 
 def switch_pump(status, pin):
-    GPIO.setup(pin, GPIO.OUT)
     if status == "on":
         GPIO.output(pin, 0)
     if status == "off":
         GPIO.output(pin, 1)
 
 def control_pump(pin_in, pin_out, max_distance, pin_pump):
-    GPIO.setmode(GPIO.BCM) 
-    GPIO.setup(pin_in, GPIO.IN)
-    GPIO.setup(pin_out, GPIO.OUT)
-
-
     while(True):
         distance = depth_measurement(pin_in, pin_out)
-        lcd.print_message("waterlevel:\n %.3f m" % distance)
-        # ubeac.send_data_water('waterlevel', distance, 'pump', 0)
+        lcd.print_message("waterlevel:\n%.3f m" % distance)
 
         if distance > max_distance:
             # If the water level is too low, turn the pump on
@@ -49,10 +43,10 @@ def control_pump(pin_in, pin_out, max_distance, pin_pump):
             while(distance > max_distance):
                 time.sleep(1)
                 distance = depth_measurement(pin_in, pin_out)
-                lcd.print_message("waterlevel:\n %.3f m" % distance)
+                lcd.print_message("waterlevel:\n%.3f m" % distance)
 
             # Once the water level is no longer too low, turn the pump off
             switch_pump("off", pin_pump)
             print("The pump has been turned off")
                 
-        time.sleep(5)
+        time.sleep(7)

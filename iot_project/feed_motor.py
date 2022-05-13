@@ -1,15 +1,8 @@
 import lcd
 import time
-
 import RPi.GPIO as GPIO
 
-GPIO.setmode(GPIO.BCM) 
-
 def full_step(pin1, pin2):
-    # Setup GPIO output channel
-    GPIO.setup(pin1, GPIO.OUT)
-    GPIO.setup(pin2, GPIO.OUT)
-
     # Turn the motor
     GPIO.output(pin1, 1)
     GPIO.output(pin2, 1)
@@ -39,7 +32,7 @@ def turn_feeding_disc_reverse(pin1, pin2, pin3, pin4):
             full_step(pin3, pin2)
             full_step(pin2, pin1)
 
-def step(pin1, pin2, pin3, pin4, frequency):
+def timed_feeding(pin1, pin2, pin3, pin4, frequency):
     # Calculate delay between pplanned feedings
     delay = 1440 / frequency
 
