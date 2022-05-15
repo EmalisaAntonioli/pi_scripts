@@ -5,6 +5,8 @@ import lcd
 import ubeac
 
 def depth_measurement(pin_in, pin_out):
+    # Uses ultrasonic sensor to measure the distance between the sensor and the waterlevel
+    # Returns said distance in meters
     GPIO.setmode(GPIO.BCM) 
     GPIO.output(pin_out, 1)
     time.sleep(0.00001)
@@ -25,12 +27,14 @@ def depth_measurement(pin_in, pin_out):
     return distance
 
 def switch_pump(status, pin):
+    # Turns relay on or off
     if status == "on":
         GPIO.output(pin, 0)
     if status == "off":
         GPIO.output(pin, 1)
 
 def control_pump(pin_in, pin_out, max_distance, pin_pump):
+    # Repetedly check the waterdepth and turn the relay on or off accordingly
     while(True):
         distance = depth_measurement(pin_in, pin_out)
         lcd.print_message("waterlevel:\n%.3f m" % distance)

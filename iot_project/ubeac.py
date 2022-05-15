@@ -4,15 +4,14 @@ import time
 
 import water_level
 
-def ubeac():
+def ubeac(ultrasonic_sensor_in, ultrasonic_sensor_out, light, pump):
     while(True):
-        data_waterlevel = water_level.depth_measurement(26, 19)
-        data_light = GPIO.input(5)
-        data_pump = GPIO.input(12)
+        data_waterlevel = water_level.depth_measurement(ultrasonic_sensor_in, ultrasonic_sensor_out)
+        data_light = GPIO.input(light)
+        data_pump = GPIO.input(pump)
         url = "http://emalisa.hub.ubeac.io/iotessEmalisa"
         uid = "iotessEmalisa"
 
-            
         data= {
         "id": uid,
         "sensors":[{
@@ -27,6 +26,6 @@ def ubeac():
             }]
         }
 
-        r = requests.post(url, verify=False,  json=data)
+        r = requests.post(url, verify=True,  json=data)
 
-        time.sleep(1)
+        time.sleep(1.5)

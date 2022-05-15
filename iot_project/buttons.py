@@ -20,11 +20,9 @@ def motor_button(pin_motor, motor1, motor2, motor3, motor4):
 
             # When the button was pressed long the disc is turned in reverse
             if (button_released - button_switched).total_seconds() > 0.5:
-                print("switch motor reverse")
                 feed_motor.turn_feeding_disc_reverse(motor1, motor2, motor3, motor4)
             # A short press turns the disc forward
             else:
-                print("switch motor")
                 feed_motor.turn_feeding_disc(motor1, motor2, motor3, motor4)
         
         # Anti-bouncing

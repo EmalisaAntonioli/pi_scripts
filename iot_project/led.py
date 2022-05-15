@@ -18,6 +18,8 @@ def control_light(pin_light):
         elif datetime.now().hour == 18 and datetime.now().minute == 0:
             turn_off_light(pin_light)
         
+        # Check whether the light is on or off
+        # Display messages on lcd screen accordingly
         if datetime.now().hour >= 7 and datetime.now().hour <= 18:
             if GPIO.input(pin_light):
 

@@ -42,6 +42,8 @@ def print_message(message):
 
     # Draw a white filled box to clear the image.
     draw.rectangle((0, 0, display.width, display.height), outline=255, fill=255) 
+
+    # Draw a row of fishes at the top
     for x in range(3, 80, 20):
         draw.polygon([(x, 3), (x+3, 6), (x, 9)], outline=0, fill=0)
         draw.polygon([(x+3, 6), (x+8, 3), (x+8, 9)], outline=0, fill=0)
@@ -49,6 +51,8 @@ def print_message(message):
         draw.point((x+15, 3))
         draw.point((x+14, 6))
         draw.point((x+16, 5))
+
+    # Display the message
     draw.text((2, 14), message, font=font)
 
     display.image(image)
@@ -64,11 +68,3 @@ def print_current_time():
         # Print current time
         lcd.print_message("current time:\n" + current_time)
         time.sleep(13)
-
-def clear_display():
-    display = initialize_display()
-    display.fill(0)
-
-    display.show()
-
-clear_display()
